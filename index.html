@@ -2,49 +2,70 @@
 <html>
 
 <head>
-    <title>EVS</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+
+  <!-- local CSS -->
+  <link rel="stylesheet" href="assets/css/index.css">
+  <title>EVS</title>
 </head>
 
-<body>
-    <div>
-        <form>
-            <div class="form-group">
-              <label for="Precipitation">Precipitation</label>
-              <input type="number" class="form-control" id="prec" placeholder="Enter Precipitation">
-            </div>
-            <div class="form-group">
-                <label for="Runoff">Runoff</label>
-                <input type="number" class="form-control" id="run" placeholder="Enter Runoff">
-              </div>
-              <div class="form-group">
-                <label for="Sub-Surface flow">Sub-Surface flow</label>
-                <input type="number" class="form-control" id="ssf" placeholder="Enter Sub-Surface flow">
-              </div>
-              <div class="form-group">
-                <label for="Infiltration">Infiltration</label>
-                <input type="number" class="form-control" id="infil" placeholder="Enter Infiltration">
-              </div>
-              <div class="form-group">
-                <label for="Evaporation">Evaporation</label>
-                <input type="number" class="form-control" id="evap" placeholder="Enter Evaporation">
-              </div>
-              <div class="form-group">
-                <label for="Transpiration">Transpiration</label>
-                <input type="number" class="form-control" id="tran" placeholder="Enter Transpiration">
-              </div>
-              <div class="form-group">
-                <label for="Storage">Storage</label>
-                <input type="number" class="form-control" id="stora" placeholder="Enter Storage">
-              </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-    </div>
+<body style="background-color: black">
+  <div>
+    <h1 class="text-center" style="padding-bottom: 20px; padding-top: 20px; color: #304ffe;">Hydro-Pro</h1>
+  </div>
+  <div>
+    <form class="form-pos">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="Precipitation" class="text-white">Precipitation :</label>
+          <input type="number" class="form-control" id="prec" placeholder="Enter Precipitation">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="Runoff" class="text-white">Runoff :</label>
+          <input type="number" class="form-control" id="run" placeholder="Enter Runoff">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="Sub-Surface flow" class="text-white">Sub-Surface flow</label>
+          <input type="number" class="form-control" id="ssf" placeholder="Enter Sub-Surface flow">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="Infiltration" class="text-white">Infiltration</label>
+          <input type="number" class="form-control" id="infil" placeholder="Enter Infiltration">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="Evaporation" class="text-white">Evaporation</label>
+          <input type="number" class="form-control" id="evap" placeholder="Enter Evaporation">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="Transpiration" class="text-white">Transpiration</label>
+          <input type="number" class="form-control" id="tran" placeholder="Enter Transpiration">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="Storage" class="text-white">Storage</label>
+          <input type="number" class="form-control" id="stora" placeholder="Enter Storage">
+        </div>
+      </div>
 
-    <script>
-        require('./renderer.js');
-    </script>
+      <button type="button" class="btn btn-outline-primary">Calculate</button>
+    </form>
+  </div>
+
+  <script>
+    require('./renderer.js');
+  </script>
+  <script src="assets/js/app.js"></script>
 </body>
 
 </html>
