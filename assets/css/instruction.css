@@ -1,0 +1,7 @@
+#close {
+    color: black;
+}
+
+#close:hover {
+    color: #304ffe;
+}

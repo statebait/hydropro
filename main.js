@@ -10,8 +10,9 @@ let win;
 
 function windowCreate() {
     win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1200,
+        height: 700,
+        resizable: false,
         icon: __dirname
     });
 
@@ -20,6 +21,10 @@ function windowCreate() {
         protocol: 'file',
         slashes: true
     }));
+
+    win.on('closed', function(){
+        app.quit();
+    });
 
     //Build menu
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
@@ -34,7 +39,20 @@ const mainMenuTemplate = [{
         label: 'File',
         submenu: [{
             // Functionality required.
-                label: 'Reset'
+                label: 'Reset',
+                accelerator: 'CmdOrCtrl+R',
+                click: function (item, focusedWindow) {
+                    if (focusedWindow) {
+                        if (focusedWindow.id == 1) {
+                            BrowserWindow.getAllWindows().forEach(function (win) {
+                                if (win.id > 1) {
+                                    win.close()
+                                }
+                            })
+                        }
+                        focusedWindow.reload();
+                    }
+                }
             },
             {
                 label: 'Exit',
@@ -44,6 +62,7 @@ const mainMenuTemplate = [{
             }
         ]
     },
+
     {
         label: 'Help',
         submenu: [{
@@ -55,6 +74,8 @@ const mainMenuTemplate = [{
                     width: 650,
                     height: 500
                 })
+
+                //to free up memory
                 win.on('close', function () {
                     win = null
                 })
@@ -62,9 +83,19 @@ const mainMenuTemplate = [{
                 win.show()
             }
         }]
-    },
-    //Temporary for Devlopment purposes
-    {
+    }
+]
+
+app.on('ready', windowCreate);
+
+//if mac, add empty object
+
+if (process.platform == 'darwin'){
+    mainMenuTemplate.unshift({});
+}
+
+if (process.env.NODE_ENV !== 'production'){
+    mainMenuTemplate.push({
         label: 'DevTools',
         accelerator: (function () {
           if (process.platform === 'darwin') {
@@ -78,15 +109,5 @@ const mainMenuTemplate = [{
             focusedWindow.toggleDevTools()
           }
         }
-      }
-]
-
-app.on('ready', windowCreate);
-
-//quit when all windows are closed
-
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
+      })
+}

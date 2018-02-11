@@ -1,3 +1,15 @@
 .form-pos {
-    padding-left: 200px;
+    padding-left: 170px;
+}
+
+#x_text {
+    width: 50px;
+    position: absolute;
+}
+
+#graph_display {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 30px;
 }
