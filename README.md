@@ -11,9 +11,3 @@
 ![Imgur](https://i.imgur.com/YkA5ceu.png)
 
 -this should start the app
-
-# Instructions on how to Contribute
-
--ALWAYS PULL BEFORE PUSHING 
-
--Try using branches when making big changes
