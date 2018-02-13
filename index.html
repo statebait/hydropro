@@ -20,9 +20,7 @@
 </head>
 
 <body>
-  <script>
-    require('./node_modules/vis/dist/vis.js');
-  </script>
+
   <div>
     <h1 class="text-center" style="padding-bottom: 20px; padding-top: 20px; color: #2196f3;">Hydro-Pro</h1>
   </div>
@@ -34,94 +32,56 @@
       <div class="form-row">
         <div class="form-group col-md-5">
           <a for="Runoff" href="info.html">Runoff :</a>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <input type="radio" aria-label="Radio button for following text input" name="range_check" id="r1" value="runoff">
-              </div>
-            </div>
-            <input class="form-control" id="run" placeholder="Enter Runoff">
-          </div>
+          <input class="form-control" id="run" placeholder="Enter Runoff">
         </div>
 
         <div class="form-group col-md-5">
           <a for="Storage" href="info.html">Storage:</a>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <input type="radio" aria-label="Radio button for following text input" name="range_check" id="r2">
-              </div>
-            </div>
-            <input class="form-control" id="stora" placeholder="Enter Storage">
-          </div>
+          <input class="form-control" id="stora" placeholder="Enter Storage">
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-5">
           <a for="Sub-Surface flow" href="info.html">Sub-Surface flow:</a>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <input type="radio" aria-label="Radio button for following text input" name="range_check" id="r3">
-                </div>
-              </div>
-              <input class="form-control" id="ssf" placeholder="Enter Sub-Surface flow">
-            </div>
+          <input class="form-control" id="ssf" placeholder="Enter Sub-Surface flow">
         </div>
 
         <div class="form-group col-md-5">
           <a for="Infiltration" href="info.html">Infiltration:</a>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <input type="radio" aria-label="Radio button for following text input" name="range_check" id="r4">
-              </div>
-            </div>
-            <input class="form-control" id="infil" placeholder="Enter Infiltration">
-          </div>
+          <input class="form-control" id="infil" placeholder="Enter Infiltration">
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-5">
           <a for="Evaporation" href="info.html">Evaporation:</a>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <input type="radio" aria-label="Radio button for following text input" name="range_check" id="r5">
-              </div>
-            </div>
-            <input class="form-control" id="evap" placeholder="Enter Evaporation">
-          </div>
+          <input class="form-control" id="evap" placeholder="Enter Evaporation">
         </div>
 
         <div class="form-group col-md-5">
           <a for="Transpiration" href="info.html">Transpiration:</a>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <input type="radio" aria-label="Radio button for following text input" name="range_check" id="r6">
-              </div>
-            </div>
-            <input class="form-control" id="tran" placeholder="Enter Transpiration">
-          </div>
+          <input class="form-control" id="tran" placeholder="Enter Transpiration">
         </div>
       </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-5">
+          <a for="Days" href="info.html">Time Period in Days:</a>
+          <input class="form-control" id="days" placeholder="Enter Days">
+        </div>
+      </div>
+
     </form>
+
   </div>
 
   <div class="text-center" style="padding-top: 20px;">
     <button type="button" onclick="mainCalc()" class="btn btn-outline-primary">Calculate</button>
   </div>
 
-  <!-- Someone add precipitation for x-axis -->
-
-  <!-- <div>
-      <h3 class="text-center" id="x_text"></h3>
-    </div> -->
-
   <div id="graph_display"></div>
+
   <div>
     <h3 class="text-center" id="y_text" style="padding-bottom: 20px;"></h3>
   </div>
@@ -131,244 +91,89 @@
 
     function mainCalc() {
 
-      // For Run-Off
+      // Get Time Period
+      var days = Number(document.getElementById('days').value);
 
-      if (document.getElementById('r1').checked) {
-        var run = document.getElementById('run').value;
-        var runarr = run.split("-");
-        var range_lower = Number(runarr[0]);
-        var range_upper = Number(runarr[1]);
-        console.log(range_lower);
-        console.log(range_upper);
-        createData();
+      var run = document.getElementById('run').value;
+      var stora = document.getElementById('stora').value;
+      var ssf = document.getElementById('ssf').value;
+      var infil = document.getElementById('infil').value;
+      var evap = document.getElementById('evap').value;
+      var tran = document.getElementById('tran').value;
+
+      var range_arr = run.split("-");
+      var rl_run = Number(range_arr[0]);
+      var ru_run = Number(range_arr[1]);
+      var step_run = (ru_run - rl_run) / days;
+
+      var range_arr = stora.split("-");
+      var rl_stora = Number(range_arr[0]);
+      var ru_stora = Number(range_arr[1]);
+      var step_stora = (ru_stora - rl_stora) / days;
+
+      var range_arr = ssf.split("-");
+      var rl_ssf = Number(range_arr[0]);
+      var ru_ssf = Number(range_arr[1]);
+      var step_ssf = (ru_ssf - rl_ssf) / days;
+
+      var range_arr = infil.split("-");
+      var rl_infil = Number(range_arr[0]);
+      var ru_infil = Number(range_arr[1]);
+      var step_infil = (ru_infil - rl_infil) / days;
+
+      var range_arr = evap.split("-");
+      var rl_evap = Number(range_arr[0]);
+      var ru_evap = Number(range_arr[1]);
+      var step_evap = (ru_evap - rl_evap) / days;
+
+      var range_arr = tran.split("-");
+      var rl_tran = Number(range_arr[0]);
+      var ru_tran = Number(range_arr[1]);
+      var step_tran = (ru_tran - rl_tran) / days;
+
+      var i = 0;
+      var items = [];
+      var prec = 0;
+
+      var groups = new vis.DataSet();
+      groups.add({
+        id: 0,
+        content: 'Precipitation' 
+      });
+
+      for (i = 1; i < Number(days + 1); i++) {
+        prec = Number(rl_infil + rl_evap + rl_tran + rl_stora - rl_run - rl_ssf);
+        items.push({
+          x: i,
+          y: prec,
+          group: 0
+        })
+        rl_infil = rl_infil + step_infil;
+        rl_evap = rl_evap + step_evap;
+        rl_run = rl_run + step_run;
+        rl_ssf = rl_ssf + step_ssf;
+        rl_stora = rl_stora + step_stora;
+        rl_tran = rl_tran + step_tran;
       }
 
-      function createData() {
-        console.log('i have reached here');
-        //Getting the value of the inputs
-        var stora = Number(document.getElementById('stora').value);
-        var ssf = Number(document.getElementById('ssf').value);
-        var infil = Number(document.getElementById('infil').value);
-        var evap = Number(document.getElementById('evap').value);
-        var tran = Number(document.getElementById('tran').value);
+      console.log(items);
 
-        var prec = 0;
-        var i = 0;
-        var items = [];
-
-        for (i = range_lower; i < range_upper; i++) {
-          prec = Number(infil + evap + tran + ssf + stora + i);
-          items.push({
-            x: prec,
-            y: i
-          })
-        }
-        console.log(items);
-        document.getElementById('y_text').innerHTML = "Runoff ->";
-        var container = document.getElementById('graph_display');
-        var dataset = new vis.DataSet(items);
-        var Graph2d = new vis.Graph2d(container, dataset);
+      var options = {
+        legend: true,
+        shaded: true,
+        start: 0,
+        end: days
       }
-
-      // For Storage
-
-      if (document.getElementById('r2').checked) {
-        var stora = document.getElementById('stora').value;
-        var runarr = stora.split("-");
-        var range_lower = Number(runarr[0]);
-        var range_upper = Number(runarr[1]);
-        console.log(range_lower);
-        console.log(range_upper);
-        createData2();
-      }
-
-      function createData2() {
-        console.log('i have reached here');
-        //Getting the value of the inputs
-        var run = Number(document.getElementById('run').value);
-        var ssf = Number(document.getElementById('ssf').value);
-        var infil = Number(document.getElementById('infil').value);
-        var evap = Number(document.getElementById('evap').value);
-        var tran = Number(document.getElementById('tran').value);
-
-        var prec = 0;
-        var i = 0;
-        var items = [];
-
-        for (i = range_lower; i < range_upper; i++) {
-          prec = Number(infil + evap + tran + ssf + run + i);
-          items.push({
-            x: prec,
-            y: i
-          })
-        }
-        console.log(items);
-        document.getElementById('y_text').innerHTML = "Storage ->";
-        var container = document.getElementById('graph_display');
-        var dataset = new vis.DataSet(items);
-        var Graph2d = new vis.Graph2d(container, dataset);
-      }
-
-      // For Sub-Surface Value
-
-      if (document.getElementById('r3').checked) {
-        var ssf = document.getElementById('ssf').value;
-        var runarr = ssf.split("-");
-        var range_lower = Number(runarr[0]);
-        var range_upper = Number(runarr[1]);
-        console.log(range_lower);
-        console.log(range_upper);
-        createData3();
-      }
-
-      function createData3() {
-        console.log('i have reached here');
-        //Getting the value of the inputs
-        var stora = Number(document.getElementById('stora').value);
-        var run = Number(document.getElementById('run').value);
-        var infil = Number(document.getElementById('infil').value);
-        var evap = Number(document.getElementById('evap').value);
-        var tran = Number(document.getElementById('tran').value);
-
-        var prec = 0;
-        var i = 0;
-        var items = [];
-
-        for (i = range_lower; i < range_upper; i++) {
-          prec = Number(infil + evap + tran + run + stora + i);
-          items.push({
-            x: prec,
-            y: i
-          })
-        }
-        console.log(items);
-        document.getElementById('y_text').innerHTML = "Sub Surface Value ->";
-        var container = document.getElementById('graph_display');
-        var dataset = new vis.DataSet(items);
-        var Graph2d = new vis.Graph2d(container, dataset);
-      }
-
-      // For Infiltration
-
-      if (document.getElementById('r4').checked) {
-        var infil = document.getElementById('infil').value;
-        var runarr = infil.split("-");
-        var range_lower = Number(runarr[0]);
-        var range_upper = Number(runarr[1]);
-        console.log(range_lower);
-        console.log(range_upper);
-        createData4();
-      }
-
-      function createData4() {
-        console.log('i have reached here');
-        //Getting the value of the inputs
-        var stora = Number(document.getElementById('stora').value);
-        var ssf = Number(document.getElementById('ssf').value);
-        var run = Number(document.getElementById('run').value);
-        var evap = Number(document.getElementById('evap').value);
-        var tran = Number(document.getElementById('tran').value);
-
-        var prec = 0;
-        var i = 0;
-        var items = [];
-
-        for (i = range_lower; i < range_upper; i++) {
-          prec = Number(run + evap + tran + ssf + stora + i);
-          items.push({
-            x: prec,
-            y: i
-          })
-        }
-        console.log(items);
-        document.getElementById('y_text').innerHTML = "Infiltration ->";
-        var container = document.getElementById('graph_display');
-        var dataset = new vis.DataSet(items);
-        var Graph2d = new vis.Graph2d(container, dataset);
-      }
-
-      // For Evaporation
-
-      if (document.getElementById('r5').checked) {
-        var evap = document.getElementById('evap').value;
-        var runarr = evap.split("-");
-        var range_lower = Number(runarr[0]);
-        var range_upper = Number(runarr[1]);
-        console.log(range_lower);
-        console.log(range_upper);
-        createData5();
-      }
-
-      function createData5() {
-        console.log('i have reached here');
-        //Getting the value of the inputs
-        var stora = Number(document.getElementById('stora').value);
-        var ssf = Number(document.getElementById('ssf').value);
-        var infil = Number(document.getElementById('infil').value);
-        var run = Number(document.getElementById('run').value);
-        var tran = Number(document.getElementById('tran').value);
-
-        var prec = 0;
-        var i = 0;
-        var items = [];
-
-        for (i = range_lower; i < range_upper; i++) {
-          prec = Number(infil + run + tran + ssf + stora + i);
-          items.push({
-            x: prec,
-            y: i
-          })
-        }
-        console.log(items);
-        document.getElementById('y_text').innerHTML = "Evaporation ->";
-        var container = document.getElementById('graph_display');
-        var dataset = new vis.DataSet(items);
-        var Graph2d = new vis.Graph2d(container, dataset);
-      }
-
-      // For Transpiration
-
-      if (document.getElementById('r6').checked) {
-        var tran = document.getElementById('tran').value;
-        var runarr = tran.split("-");
-        var range_lower = Number(runarr[0]);
-        var range_upper = Number(runarr[1]);
-        console.log(range_lower);
-        console.log(range_upper);
-        createData6();
-      }
-
-      function createData6() {
-        console.log('i have reached here');
-        //Getting the value of the inputs
-        var stora = Number(document.getElementById('stora').value);
-        var ssf = Number(document.getElementById('ssf').value);
-        var infil = Number(document.getElementById('infil').value);
-        var evap = Number(document.getElementById('evap').value);
-        var run = Number(document.getElementById('run').value);
-
-        var prec = 0;
-        var i = 0;
-        var items = [];
-
-        for (i = range_lower; i < range_upper; i++) {
-          prec = Number(infil + evap + run + ssf + stora + i);
-          items.push({
-            x: prec,
-            y: i
-          })
-        }
-        console.log(items);
-        document.getElementById('y_text').innerHTML = "Transpiration ->";
-        var container = document.getElementById('graph_display');
-        var dataset = new vis.DataSet(items);
-        var Graph2d = new vis.Graph2d(container, dataset);
-      }
+      var container = document.getElementById('graph_display');
+      var dataset = new vis.DataSet(items);
+      var Graph2d = new vis.Graph2d(container, dataset, options, groups);
 
     };
   </script>
 
-  <script src="./assets/js/app.js"></script>
+  <script>
+    require('./node_modules/vis/dist/vis.js');
+  </script>
 
   <script>
     require('./renderer.js');
