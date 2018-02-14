@@ -8,4 +8,5 @@ A simple application built on Electron that simulates particular instances of th
 - Install npm and node from [HERE](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm)
 - Open the terminal of your choice in your respective os and move to the cloned directory
 - Type in the following commands:
-![Imgur](https://i.imgur.com/YkA5ceu.png)
+
+- ![Imgur](https://i.imgur.com/YkA5ceu.png)
