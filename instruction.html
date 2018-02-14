@@ -16,38 +16,79 @@
 </head>
 
 <body style="background-color: white;">
-    <div>
-        <h3 class="text-center" style="color: #2196f3; padding-top: 20px; padding-bottom: 20px;">
-            Instructions
-        </h3>
+
+    <div style="position: absolute;">
+        <span onclick="openNav()">
+            <img class="side_menu" src="./assets/images/menu-3x.png">
+        </span>
+
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="instruction.html">Instructions</a>
+        <a href="info.html">Information</a>
+        <a href="cycle.html">Cycle</a>
+    </div>
+
+    <h1 class="text-center" style="color: #2196f3; padding-top: 20px; padding-bottom: 20px;">
+        Instructions
+    </h1>
+
+    <div style="margin-left: 30px; margin-right: 30px; font-size: 20px;">
+
         <ul>
-          <li>
-            Enter ranges for the six parameters in the corresponding text fields provided. Range input should be given in the format 'lower_bound-upper_bound' Make sure there is no trailing whitespace and no space between the bound values and the hyphen delimiter. To pass a decreasing range as the parameter input, set the value of the lower_bound to be greater than that of the upper_bound. To pass a constant input for a particular parameter, set both lower_bound and upper_bound to the same value. Make sure that no parameter input is left blank.
-          </li>
-          <li>
-            The number of days specify the timeframe over which the range inputs are varied. Broadly speaking, the parameter input ranges are varied uniformly across the duration of the timeframe to simulate it's proper effect on the Hydrological Cycle Process.
-          </li>
-          <li>
-            Click on the Field Name of each parameter to get more information about that particular component's role in the Hydrological Cycle.
-          </li>
-          <li>
-            Press Calculate to render a dynamic, scalable and draggable graph plotting the value of precipitation against the varying ranges of the other components in the Hydrological Budget Equation.
-          </li>
-          <li>
-            Use Ctrl+R to Reset the current application buffer data and make it ready to accept a new set of input parameter ranges and return output for a new graph simulation.
-          </li>
+            <li>
+                Enter ranges for the six parameters in the corresponding text fields provided. Range input should be given in the format
+                'lower_bound-upper_bound'.
+            </li>
+            <li>
+                Make sure there is no trailing whitespace and no space between the bound values and the hyphen delimiter.
+            </li>
+            <li>To pass a decreasing range as the parameter input, set the value of the lower_bound to be greater than that of
+                the upper_bound.
+            </li>
+            <li>To pass a constant input for a particular parameter, set both lower_bound and upper_bound to the same value.
+                Make sure that no parameter input is left blank.
+            </li>
+            <li>
+                The number of days specify the timeframe over which the range inputs are varied. The Parameter input ranges are varied uniformly
+                across the duration of the timeframe to simulate it's proper effect on the Hydrological Cycle Process.
+            </li>
+            <li>
+                Click on the Field Name of each parameter to get more information about that particular component's role in the Hydrological
+                Cycle.
+            </li>
+            <li>
+                Press Calculate to render a dynamic, scalable and draggable graph plotting the value of precipitation against the varying
+                ranges of the other components in the Hydrological Budget Equation.
+            </li>
+            <li>
+                Use Ctrl+R to Reset the current application buffer data and make it ready to accept a new set of input parameter ranges and
+                return output for a new graph simulation.
+            </li>
         </ul>
     </div>
-    <div class="text-center container">
-        <a href="javascript:window.close()" id="close">
-            <span>&times;</span>
+
+    <div class="text-center" style="margin-bottom: 20px;">
+        <a href="index.html">
+            <img style="height: 20px; width: 50px;" src="./assets/images/arrow-left.svg">
         </a>
     </div>
 
     <script>
-        require('./renderer.js');
+        /* Sets the width of the side navigation to 200px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "200px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
     </script>
-    <script src="assets/js/instruction.js"></script>
+
 </body>
 
 </html>

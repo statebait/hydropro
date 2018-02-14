@@ -1,7 +1,7 @@
 {
-  "name": "evsapp",
+  "name": "hydropro",
   "version": "1.0.0",
-  "description": "evsapp",
+  "description": "An application to simulate the Hydrological Cycle",
   "main": "main.js",
   "scripts": {
     "start": "electron .",

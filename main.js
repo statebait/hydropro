@@ -13,7 +13,7 @@ function windowCreate() {
         width: 1200,
         height: 700,
         resizable: false,
-        icon: path.join(__dirname,'assets/icons/win/icon.ico')
+        icon: path.join(__dirname, 'assets/icons/win/icon.ico')
     });
 
     win.loadURL(url.format({
@@ -22,7 +22,7 @@ function windowCreate() {
         slashes: true
     }));
 
-    win.on('closed', function(){
+    win.on('closed', function () {
         app.quit();
     });
 
@@ -36,78 +36,55 @@ function windowCreate() {
 //      Menu Template
 
 const mainMenuTemplate = [{
-        label: 'File',
-        submenu: [{
+    label: 'File',
+    submenu: [{
             // Functionality required.
-                label: 'Reset',
-                accelerator: 'CmdOrCtrl+R',
-                click: function (item, focusedWindow) {
-                    if (focusedWindow) {
-                        if (focusedWindow.id == 1) {
-                            BrowserWindow.getAllWindows().forEach(function (win) {
-                                if (win.id > 1) {
-                                    win.close()
-                                }
-                            })
-                        }
-                        focusedWindow.reload();
+            label: 'Reset',
+            accelerator: 'CmdOrCtrl+R',
+            click: function (item, focusedWindow) {
+                if (focusedWindow) {
+                    if (focusedWindow.id == 1) {
+                        BrowserWindow.getAllWindows().forEach(function (win) {
+                            if (win.id > 1) {
+                                win.close()
+                            }
+                        })
                     }
-                }
-            },
-            {
-                label: 'Exit',
-                click() {
-                    app.quit();
+                    focusedWindow.reload();
                 }
             }
-        ]
-    },
-
-    {
-        label: 'Help',
-        submenu: [{
-            label: 'Instructions',
+        },
+        {
+            label: 'Exit',
             click() {
-                const modalPath = path.join(__dirname, 'instruction.html')
-                let win = new BrowserWindow({
-                    frame: false,
-                    width: 650,
-                    height: 500
-                })
-
-                //to free up memory
-                win.on('close', function () {
-                    win = null
-                })
-                win.loadURL(modalPath)
-                win.show()
+                app.quit();
             }
-        }]
-    }
-]
+        }
+    ]
+}]
 
 app.on('ready', windowCreate);
 
 //if mac, add empty object
 
-if (process.platform == 'darwin'){
+if (process.platform == 'darwin') {
     mainMenuTemplate.unshift({});
 }
 
-if (process.env.NODE_ENV !== 'production'){
-    mainMenuTemplate.push({
-        label: 'DevTools',
-        accelerator: (function () {
-          if (process.platform === 'darwin') {
-            return 'Alt+Command+I'
-          } else {
-            return 'Ctrl+Shift+I'
-          }
-        })(),
-        click: function (item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.toggleDevTools()
-          }
-        }
-      })
-}
+// if (process.env.NODE_ENV !== 'production') {
+//     mainMenuTemplate.push({
+//         label: 'DevTools',
+//         accelerator: (function () {
+//             if (process.platform === 'darwin') {
+//                 return 'Alt+Command+I'
+//             } else {
+//                 return 'Ctrl+Shift+I'
+//             }
+//         })(),
+//         click: function (item, focusedWindow) {
+//             if (focusedWindow) {
+//                 focusedWindow.toggleDevTools()
+//             }
+//         }
+//     })
+// }

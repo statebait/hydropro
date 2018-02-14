@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <!-- Vis CSS -->
+    <link rel="stylesheet" href="node_modules/vis/dist/vis.css">
+
+    <!-- local CSS -->
+    <link rel="stylesheet" href="assets/css/cycle.css">
+
+    <title>EVS</title>
+
+</head>
+
+<body>
+
+    <div style="position: absolute;">
+        <span onclick="openNav()">
+            <img class="side_menu" src="./assets/images/menu-3x.png">
+        </span>
+
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="instruction.html">Instructions</a>
+        <a href="info.html">Information</a>
+        <a href="cycle.html">Cycle</a>
+    </div>
+    <div id="cycle">
+        <img src="./assets/images/cycle.jpg">
+    </div>
+
+    <script>
+        /* Sets the width of the side navigation to 200px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "200px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+
+</html>
