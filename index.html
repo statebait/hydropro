@@ -21,75 +21,102 @@
 
 <body>
 
-  <div>
-    <h1 class="text-center" style="padding-bottom: 20px; padding-top: 20px; color: #2196f3;">Hydro-Pro</h1>
+  <span onclick="openNav()">
+    <img style="" class="side_menu" src="./assets/images/menu-4x.png">
+  </span>
+
+  <h1 class="text-center" style="padding-bottom: 20px; padding-top: 20px; color: #2196f3;">Hydro-Pro</h1>
+
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="instruction.html">Instructions</a>
+    <a href="info.html">Information</a>
+    <a href="#">Cycle Simulation</a>
   </div>
 
-  <div class="form-pos">
+  <div id="main">
 
-    <form>
+    <div class="form-pos">
+      <form>
 
-      <div class="form-row">
-        <div class="form-group col-md-5">
-          <a for="Runoff" href="info.html">Runoff :</a>
-          <input class="form-control" id="run" placeholder="Enter Runoff">
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <a for="Runoff" href="info.html">Runoff :</a>
+            <input class="form-control" id="run" placeholder="Enter Runoff">
+          </div>
+
+          <div class="form-group col-md-5">
+            <a for="Storage" href="info.html">Storage:</a>
+            <input class="form-control" id="stora" placeholder="Enter Storage">
+          </div>
         </div>
 
-        <div class="form-group col-md-5">
-          <a for="Storage" href="info.html">Storage:</a>
-          <input class="form-control" id="stora" placeholder="Enter Storage">
-        </div>
-      </div>
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <a for="Sub-Surface flow" href="info.html">Sub-Surface flow:</a>
+            <input class="form-control" id="ssf" placeholder="Enter Sub-Surface flow">
+          </div>
 
-      <div class="form-row">
-        <div class="form-group col-md-5">
-          <a for="Sub-Surface flow" href="info.html">Sub-Surface flow:</a>
-          <input class="form-control" id="ssf" placeholder="Enter Sub-Surface flow">
-        </div>
-
-        <div class="form-group col-md-5">
-          <a for="Infiltration" href="info.html">Infiltration:</a>
-          <input class="form-control" id="infil" placeholder="Enter Infiltration">
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-5">
-          <a for="Evaporation" href="info.html">Evaporation:</a>
-          <input class="form-control" id="evap" placeholder="Enter Evaporation">
+          <div class="form-group col-md-5">
+            <a for="Infiltration" href="info.html">Infiltration:</a>
+            <input class="form-control" id="infil" placeholder="Enter Infiltration">
+          </div>
         </div>
 
-        <div class="form-group col-md-5">
-          <a for="Transpiration" href="info.html">Transpiration:</a>
-          <input class="form-control" id="tran" placeholder="Enter Transpiration">
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <a for="Evaporation" href="info.html">Evaporation:</a>
+            <input class="form-control" id="evap" placeholder="Enter Evaporation">
+          </div>
+
+          <div class="form-group col-md-5">
+            <a for="Transpiration" href="info.html">Transpiration:</a>
+            <input class="form-control" id="tran" placeholder="Enter Transpiration">
+          </div>
         </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group col-md-5">
-          <a for="Days" href="info.html">Time Period in Days:</a>
-          <input class="form-control" id="days" placeholder="Enter Days">
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <a for="Days" href="info.html">Time Period in Days:</a>
+            <input class="form-control" id="days" placeholder="Enter Days">
+          </div>
         </div>
-      </div>
 
-    </form>
+      </form>
+    </div>
 
+    <div class="text-center" style="padding-top: 20px;">
+      <button type="button" onclick="mainCalc()" class="btn btn-outline-primary">Calculate</button>
+    </div>
+
+    <div id="graph_display"></div>
+
+    <div>
+      <h5 class="text-center" id="y_text" style="padding-bottom: 20px;"></h5>
+    </div>
   </div>
 
-  <div class="text-center" style="padding-top: 20px;">
-    <button type="button" onclick="mainCalc()" class="btn btn-outline-primary">Calculate</button>
-  </div>
 
-  <div id="graph_display"></div>
-
-  <div>
-    <h3 class="text-center" id="y_text" style="padding-bottom: 20px;"></h3>
-  </div>
 
   <script>
     var vis = require('vis');
+    var count = 0;
+
+    /* Sets the width of the side navigation to 200px */
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "200px";
+    }
+
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
 
     function mainCalc() {
+
+      if (count != 0) {
+        document.getElementById("graph_display").innerHTML = "";
+      }
 
       // Get Time Period
       var days = Number(document.getElementById('days').value);
@@ -136,18 +163,104 @@
       var prec = 0;
 
       var groups = new vis.DataSet();
+
       groups.add({
         id: 0,
-        content: 'Precipitation' 
+        content: 'Precipitation',
+        options: {
+          interpolation: {
+            parametrization: 'Precipitation'
+          }
+        }
+      });
+
+      groups.add({
+        id: 1,
+        content: 'Infiltration',
+        options: {
+          interpolation: 'Infiltration'
+        }
+      });
+
+      groups.add({
+        id: 2,
+        content: 'Evaporation',
+        options: {
+          interpolation: 'Evaporation'
+        }
+      });
+
+      groups.add({
+        id: 3,
+        content: 'Transpiration',
+        options: {
+          interpolation: 'Transpiration'
+        }
+      });
+
+      groups.add({
+        id: 4,
+        content: 'Storage',
+        options: {
+          interpolation: 'Storage'
+        }
+      });
+
+      groups.add({
+        id: 5,
+        content: 'Runoff',
+        options: {
+          interpolation: 'Runoff'
+        }
+      });
+
+      groups.add({
+        id: 6,
+        content: 'Sub-Surface Flow',
+        options: {
+          interpolation: 'Sub-Surface Flow'
+        }
       });
 
       for (i = 1; i < Number(days + 1); i++) {
         prec = Number(rl_infil + rl_evap + rl_tran + rl_stora - rl_run - rl_ssf);
+
         items.push({
           x: i,
           y: prec,
           group: 0
-        })
+        });
+        items.push({
+          x: i,
+          y: rl_infil,
+          group: 1
+        });
+        items.push({
+          x: i,
+          y: rl_evap,
+          group: 2
+        });
+        items.push({
+          x: i,
+          y: rl_tran,
+          group: 3
+        });
+        items.push({
+          x: i,
+          y: rl_stora,
+          group: 4
+        });
+        items.push({
+          x: i,
+          y: rl_run,
+          group: 5
+        });
+        items.push({
+          x: i,
+          y: rl_ssf,
+          group: 6
+        });
+
         rl_infil = rl_infil + step_infil;
         rl_evap = rl_evap + step_evap;
         rl_run = rl_run + step_run;
@@ -167,6 +280,10 @@
       var container = document.getElementById('graph_display');
       var dataset = new vis.DataSet(items);
       var Graph2d = new vis.Graph2d(container, dataset, options, groups);
+
+      document.getElementById('y_text').innerHTML = "Time Period (Days) ->";
+
+      count = count + 1;
 
     };
   </script>

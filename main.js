@@ -13,7 +13,7 @@ function windowCreate() {
         width: 1200,
         height: 700,
         resizable: false,
-        icon: __dirname
+        icon: path.join(__dirname,'assets/icons/win/icon.ico')
     });
 
     win.loadURL(url.format({
