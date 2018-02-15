@@ -1,3 +1,7 @@
+ ## Description
+
+A simple cross-platform desktop application built on electron that simulates particular instances of the Hydrological Cycle. The simulation works on the basis of the Hydrological Budget Equation, each parameter of which is given a range that is varied across a set timeframe. In this manner the application renders a graph of expected precipitation in the localized region corresponding to the input values over the particular timeframe.
+ 
  ## Instructions to get app running
 
 - Clone the repo on your computer
