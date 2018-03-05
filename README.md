@@ -17,4 +17,4 @@ npm start
 ```
 - This will start the Application!
 
-First Release coming soon!
+First Release is out! check it out [here!](https://github.com/shadxx7/hydropro/releases/tag/1.0.0)
