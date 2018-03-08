@@ -1,5 +1,15 @@
  /* The side navigation menu */
 
+ #fire {
+     padding-top: 100px;
+     padding-left: 200px;
+ }
+
+ #fire img {
+     height: 500px;
+     width: 800px;
+ }
+
  .side_menu {
      margin-top: 20px;
      margin-left: 20px;
