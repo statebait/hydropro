@@ -1,6 +1,6 @@
 {
   "name": "hydropro",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "An application to simulate the Hydrological Cycle",
   "main": "main.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "package-win": "electron-packager . hydropro --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Hydropro\""
   },
   "devDependencies": {
-    "electron": "^1.8.2",
+    "electron": "1.8.3",
     "electron-packager": "^11.0.0"
   },
   "author": "Shady",
