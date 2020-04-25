@@ -14,7 +14,7 @@
   "author": "Shady",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.4.1",
     "vis": "^4.21.0"
   }
 }
